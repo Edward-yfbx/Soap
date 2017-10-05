@@ -1,4 +1,4 @@
-package com.yfbx.soap;
+package com.yfbx.soaputil.utils;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -20,11 +20,11 @@ import java.io.IOException;
 public class Soap {
 
     private static final String NAME_SPACE = "http://tempuri.org/";
+    private static final String WSDL = "http://61.93.114.100:8002/POSTestWebService/ServiceFile.asmx";
 
     public static final int CONNECTION_FAIL = -1;
     public static final int ARGS_ERROR = -2;
     public static final int SERVER_ERROR = -3;
-    private String wsdl;
 
     private Handler handler;
     private OnSoapListener listener;
@@ -32,17 +32,12 @@ public class Soap {
 
     private static Soap soap;
 
-    private Soap(String wsdl) {
-        this.wsdl = wsdl;
-    }
-
-    public static Soap wsdl(String wsdl) {
-        soap = new Soap(wsdl);
-        return soap;
-    }
-
-    public Soap method(String method) {
+    private Soap(String method) {
         soapObject = new SoapObject(NAME_SPACE, method);
+    }
+
+    public static Soap method(String method) {
+        soap = new Soap(method);
         return soap;
     }
 
@@ -77,7 +72,7 @@ public class Soap {
         final SoapSerializationEnvelope se = new SoapSerializationEnvelope(SoapEnvelope.VER12);
         se.dotNet = true;
         se.bodyOut = soapObject;
-        HttpTransportSE ht = new HttpTransportSE(wsdl);
+        HttpTransportSE ht = new HttpTransportSE(WSDL);
 
         try {
             ht.call(NAME_SPACE, se);
