@@ -4,34 +4,27 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.yfbx.soaputil.events.NetFailEvent;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import com.yfbx.soap.net.NetConfig;
 
 /**
  * Author: Edward
- * Date: 2017/10/4 23:53
+ * Date: 2017/11/11 0:52
  * Description:
  */
 
 public class BaseActivity extends Activity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onNetFail(NetFailEvent event) {
-        Toast.makeText(this, "请求失败！", Toast.LENGTH_SHORT).show();
+    public void onNetError() {
+        if (NetConfig.isNetAvailable(this)) {
+            Toast.makeText(this, "网络不可用！", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "服务器错误，请稍后再试！", Toast.LENGTH_SHORT).show();
+        }
     }
 }
