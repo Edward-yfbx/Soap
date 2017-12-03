@@ -9,7 +9,7 @@ package com.yfbx.soaputil.net;
 
 public interface Api {
 
-    String WSDL = "http://61.93.114.100:8002/POSTestWebService/ServiceFile.asmx";
+    String WSDL = "";
 
     String Login = "";
 
