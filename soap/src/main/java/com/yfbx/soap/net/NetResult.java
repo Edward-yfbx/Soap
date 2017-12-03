@@ -10,12 +10,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class NetResult<T> {
 
-//     Based on Json format:
-//     {
-//     "code":1,
-//     "msg":"success",
-//     "data":[ ] / { }
-//     }
 
     @SerializedName(value = "code", alternate = {"status", "retCode"})
     public int code;
@@ -23,5 +17,7 @@ public class NetResult<T> {
     public String msg;
     @SerializedName(value = "data", alternate = {"contents", "retData"})
     public T data;
+
+    public String json;
 
 }

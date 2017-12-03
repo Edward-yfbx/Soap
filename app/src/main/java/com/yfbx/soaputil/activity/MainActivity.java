@@ -1,23 +1,29 @@
 package com.yfbx.soaputil.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
-import com.yfbx.soap.gson.GsonUtil;
+import com.yfbx.soap.net.NetCallback;
 import com.yfbx.soap.net.NetResult;
-import com.yfbx.soap.net.Soap;
 import com.yfbx.soaputil.R;
-import com.yfbx.soaputil.bean.Info;
-import com.yfbx.soaputil.configs.WSDL;
+import com.yfbx.soaputil.bean.User;
+import com.yfbx.soaputil.net.Api;
+import com.yfbx.soaputil.net.Net;
 
-public class MainActivity extends BaseActivity {
+import java.util.List;
+
+public class MainActivity extends Activity {
+
+    private TextView text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        text = findViewById(R.id.text);
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -29,15 +35,16 @@ public class MainActivity extends BaseActivity {
 
     private void testSoap() {
 
-        Soap.with(WSDL.get(), "method").params("", "").request(new Soap.OnSoapListener() {
+        Net.api(Api.TEST_CONNECTION).request(User.class, new NetCallback<User>() {
             @Override
-            public void onResponse(String json) {
-                NetResult<Info> infoNetResult = GsonUtil.fromJsonObject(json, Info.class);
+            public void onSuccess(NetResult<User> result, NetResult<List<User>> resultList) {
+                text.setText(result.json);
             }
 
             @Override
-            public void onFailure() {
-                onNetError();
+            public void onError() {
+                text.setText("请求失败");
+
             }
         });
     }

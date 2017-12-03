@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SoapUtil.iml" filepath="$PROJECT_DIR$/SoapUtil.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Soap.iml" filepath="$PROJECT_DIR$/Soap.iml" />
+      <module fileurl="file://G:\Github\Soap\SoapUtil.iml" filepath="G:\Github\Soap\SoapUtil.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/soap/soap.iml" filepath="$PROJECT_DIR$/soap/soap.iml" />
     </modules>

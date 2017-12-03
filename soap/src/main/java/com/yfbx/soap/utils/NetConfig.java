@@ -1,4 +1,4 @@
-package com.yfbx.soap.net;
+package com.yfbx.soap.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -92,5 +92,4 @@ public class NetConfig {
         }
         return netType;
     }
-
 }
