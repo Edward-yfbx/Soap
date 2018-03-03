@@ -11,7 +11,5 @@ public interface Api {
 
     String WSDL = "";
 
-    String Login = "";
-
     String TEST_CONNECTION = "TestConnection ";
 }

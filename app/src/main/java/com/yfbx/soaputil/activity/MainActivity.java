@@ -5,14 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.yfbx.soap.net.NetCallback;
-import com.yfbx.soap.net.NetResult;
 import com.yfbx.soaputil.R;
-import com.yfbx.soaputil.bean.User;
 import com.yfbx.soaputil.net.Api;
 import com.yfbx.soaputil.net.Net;
-
-import java.util.List;
+import com.yfbx.soaputil.net.SoapCallback;
 
 public class MainActivity extends Activity {
 
@@ -35,16 +31,10 @@ public class MainActivity extends Activity {
 
     private void testSoap() {
 
-        Net.api(Api.TEST_CONNECTION).request(User.class, new NetCallback<User>() {
+        Net.method(Api.TEST_CONNECTION).request(new SoapCallback() {
             @Override
-            public void onSuccess(NetResult<User> result, NetResult<List<User>> resultList) {
-                text.setText(result.json);
-            }
-
-            @Override
-            public void onError() {
-                text.setText("请求失败");
-
+            public void onComplete(String result) {
+                text.setText(result);
             }
         });
     }
